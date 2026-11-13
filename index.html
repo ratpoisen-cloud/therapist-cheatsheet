@@ -185,17 +185,42 @@
       padding: 0 20px;
     }
 
-    /* Disclaimer alert */
-    .disclaimer-banner {
+    /* Disclaimer (collapsible, in footer) */
+    .site-footer {
+      max-width: 1300px;
+      margin: 30px auto 40px;
+      padding: 0 20px;
+    }
+    .disclaimer-details {
       background: var(--warning-bg);
       border-left: 4px solid #d8a000;
       padding: 10px 14px;
       border-radius: 4px;
       font-size: 0.82rem;
-      margin-bottom: 20px;
+    }
+    .disclaimer-details summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--text);
+      list-style: none;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      gap: 6px;
+      user-select: none;
+    }
+    .disclaimer-details summary::-webkit-details-marker { display: none; }
+    .disclaimer-details summary::after {
+      content: "▾";
+      margin-left: auto;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      transition: transform 0.15s ease;
+    }
+    .disclaimer-details[open] summary::after { transform: rotate(180deg); }
+    .disclaimer-details p {
+      margin: 8px 0 0;
+      line-height: 1.5;
+      color: var(--text);
     }
 
     /* Nosology Section */
@@ -564,7 +589,8 @@
     /* Print styles */
     @media print {
       body { background: white; color: black; font-size: 9pt; padding: 0; }
-      header, .header-actions, .nav-tabs, .search-box, .btn-copy, .disclaimer-banner, .btn, #casesView, .offline-chip { display: none !important; }
+      header, .header-actions, .nav-tabs, .search-box, .btn-copy, .btn, #casesView, .offline-chip { display: none !important; }
+      .site-footer { max-width: 100%; margin: 15px 0 0; padding: 0; }
       .container { max-width: 100%; margin: 0; padding: 0; }
       .nosology-card { box-shadow: none; border: 1px solid #ccc; break-inside: avoid; margin-bottom: 15px; }
       .nosology-header { background: #eee !important; color: black !important; }
@@ -640,12 +666,6 @@
   </header>
 
   <main class="container">
-    <!-- Clinical Disclaimer -->
-    <div class="disclaimer-banner">
-      <span>ℹ️ <strong>Для врачей и медицинских специалистов:</strong> Дозировки приведены в соответствии с актуальными Клиническими рекомендациями Минздрава РФ. Решение о назначении принимается лечащим врачом с учетом противопоказаний и индивидуального статуса пациента.</span>
-      <button style="background:none; border:none; cursor:pointer; font-size:1rem;" onclick="this.parentElement.style.display='none'">✕</button>
-    </div>
-
     <!-- Content Area for Nosologies -->
     <div id="contentArea"></div>
 
@@ -746,6 +766,14 @@
       <div id="caseRunner" style="display: none;"></div>
     </div>
   </main>
+
+  <!-- Footer: collapsible clinical disclaimer -->
+  <footer class="site-footer">
+    <details class="disclaimer-details">
+      <summary>ℹ️ Для врачей и медицинских специалистов</summary>
+      <p>Дозировки приведены в соответствии с актуальными Клиническими рекомендациями Минздрава РФ. Решение о назначении принимается лечащим врачом с учетом противопоказаний и индивидуального статуса пациента.</p>
+    </details>
+  </footer>
 
   <div class="toast" id="toastNotification">Назначение скопировано в буфер!</div>
 

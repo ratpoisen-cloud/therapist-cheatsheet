@@ -1,5 +1,5 @@
 /* Service Worker: офлайн-режим для шпаргалки терапевта (PWA) */
-const CACHE_VERSION = 'therapist-cheatsheet-v1.2.1';
+const CACHE_VERSION = 'therapist-cheatsheet-v1.2.2';
 const CORE_ASSETS = [
   './',
   './index.html',
