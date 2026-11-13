@@ -1,0 +1,12 @@
+# Секреты и локальные файлы
+tokken.rtf
+*.rtf
+
+# macOS
+.DS_Store
+._*
+
+# Редакторы
+.vscode/
+.idea/
+*.swp

@@ -1,0 +1,2268 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Шпаргалка терапевта: Назначения и дозировки (КР МЗ РФ)</title>
+  <meta name="description" content="Офлайн-шпаргалка участкового терапевта: 9 нозологий, дозировки по КР МЗ РФ, калькуляторы и интерактивный тренажер клинических кейсов.">
+  <meta name="theme-color" content="#106ebe">
+  <meta name="color-scheme" content="light dark">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon-180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Терапевт">
+  <style>
+    :root {
+      --primary: #106ebe;
+      --primary-dark: #004578;
+      --primary-light: #deecf9;
+      --bg: #f4f6f8;
+      --card-bg: #ffffff;
+      --text: #201f1e;
+      --text-muted: #605e5c;
+      --border: #e1dfdd;
+      --danger: #d13438;
+      --danger-light: #fde7e9;
+      --warning: #797775;
+      --warning-bg: #fff4ce;
+      --success: #107c10;
+      --success-light: #dff6dd;
+      --shadow: 0 1.6px 3.6px rgba(0,0,0,0.13), 0 0.3px 0.9px rgba(0,0,0,0.1);
+      --radius: 8px;
+    }
+
+    [data-theme="dark"] {
+      --primary: #2899f5;
+      --primary-dark: #0078d4;
+      --primary-light: #1f3d5c;
+      --bg: #121212;
+      --card-bg: #1e1e1e;
+      --text: #f3f2f1;
+      --text-muted: #a19f9d;
+      --border: #323130;
+      --danger: #f1707b;
+      --danger-light: #3b181c;
+      --warning-bg: #3e3818;
+      --success: #54b054;
+      --success-light: #123315;
+      --shadow: 0 2px 6px rgba(0,0,0,0.5);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    body { background: var(--bg); color: var(--text); line-height: 1.5; padding-bottom: 60px; transition: background 0.2s, color 0.2s; }
+    
+    header {
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow);
+    }
+
+    .header-top {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-icon {
+      background: var(--primary);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: bold;
+    }
+    .brand h1 { font-size: 1.25rem; font-weight: 700; color: var(--text); }
+    .brand p { font-size: 0.8rem; color: var(--text-muted); }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .search-box {
+      position: relative;
+      flex: 1;
+      min-width: 260px;
+      max-width: 420px;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 9px 12px 9px 36px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 0.9rem;
+      outline: none;
+      transition: all 0.2s;
+    }
+    .search-box input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-light);
+    }
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .btn {
+      padding: 8px 14px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      color: var(--text);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .btn:hover { background: var(--primary-light); border-color: var(--primary); color: var(--primary-dark); }
+    .btn-primary { background: var(--primary); color: white; border: none; }
+    .btn-primary:hover { background: var(--primary-dark); color: white; }
+
+    /* Navigation tabs */
+    .nav-tabs {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      overflow-x: auto;
+      scrollbar-width: none;
+      gap: 8px;
+    }
+    .nav-tabs::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      padding: 10px 16px;
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .tab-btn:hover { color: var(--primary); }
+    .tab-btn.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1300px;
+      margin: 20px auto;
+      padding: 0 20px;
+    }
+
+    /* Disclaimer alert */
+    .disclaimer-banner {
+      background: var(--warning-bg);
+      border-left: 4px solid #d8a000;
+      padding: 10px 14px;
+      border-radius: 4px;
+      font-size: 0.82rem;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Nosology Section */
+    .nosology-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      margin-bottom: 30px;
+      overflow: hidden;
+    }
+    .nosology-header {
+      padding: 16px 20px;
+      background: linear-gradient(to right, var(--primary-light), transparent);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .nosology-header h2 { font-size: 1.25rem; font-weight: 700; color: var(--primary-dark); display: flex; align-items: center; gap: 8px; }
+    .badge-code {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-family: monospace;
+      color: var(--text-muted);
+    }
+
+    .nosology-body { padding: 20px; }
+    .nosology-summary { margin-bottom: 16px; font-size: 0.95rem; color: var(--text); }
+
+    /* Red Flags Alert Box */
+    .red-flags-box {
+      background: var(--danger-light);
+      border: 1px solid var(--danger);
+      border-left: 6px solid var(--danger);
+      border-radius: 6px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+    }
+    .red-flags-box h4 {
+      color: var(--danger);
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+    .red-flags-list {
+      list-style-type: disc;
+      padding-left: 22px;
+      font-size: 0.88rem;
+    }
+    .red-flags-list li { margin-bottom: 4px; }
+
+    /* Tables */
+    .table-responsive {
+      overflow-x: auto;
+      margin-top: 15px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    th, td {
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      background: var(--bg);
+      font-weight: 600;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    tr:hover td { background: var(--bg); }
+
+    .badge-firstline {
+      background: var(--success-light);
+      color: var(--success);
+      font-weight: 700;
+      font-size: 0.72rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 4px;
+    }
+
+    .badge-reserve {
+      background: var(--warning-bg);
+      color: #925400;
+      font-size: 0.72rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 4px;
+    }
+
+    .drug-name { font-weight: 700; font-size: 0.95rem; color: var(--text); }
+    .trade-names { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
+    .dosage-text { font-weight: 600; color: var(--primary-dark); }
+    .notes-text { font-size: 0.82rem; color: var(--text-muted); }
+
+    .btn-copy {
+      padding: 4px 8px;
+      font-size: 0.75rem;
+      border-radius: 4px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+    .btn-copy:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* Calculators Tab */
+    .calc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 20px;
+    }
+    .calc-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+    .calc-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .form-group { margin-bottom: 12px; }
+    .form-group label { display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 4px; color: var(--text-muted); }
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 0.9rem;
+    }
+    .calc-result {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 6px;
+      background: var(--primary-light);
+      border-left: 4px solid var(--primary);
+      font-size: 0.9rem;
+    }
+    .calc-result strong { color: var(--primary-dark); font-size: 1.1rem; }
+
+    /* Offline status chip */
+    .offline-chip {
+      max-width: 1300px;
+      margin: 8px auto 0;
+      padding: 6px 20px;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .offline-chip[hidden] { display: none; }
+
+    /* Clinical cases trainer */
+    .cases-hero {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+    }
+    .cases-hero h2 { font-size: 1.35rem; margin-bottom: 8px; }
+    .cases-hero p { font-size: 0.88rem; opacity: 0.95; max-width: 900px; }
+    .cases-stats { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 14px; font-size: 0.82rem; }
+    .cases-stats span { background: rgba(255,255,255,0.18); padding: 5px 12px; border-radius: 20px; font-weight: 600; }
+
+    .cases-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+    .cases-filter-btn {
+      padding: 6px 13px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .cases-filter-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .cases-filter-btn.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+
+    .cases-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+      gap: 16px;
+    }
+    .case-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      cursor: pointer;
+      transition: transform 0.15s, border-color 0.15s;
+    }
+    .case-card:hover { transform: translateY(-2px); border-color: var(--primary); }
+    .case-card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+    .case-card h3 { font-size: 1rem; color: var(--text); line-height: 1.35; }
+    .case-card .case-meta { font-size: 0.76rem; color: var(--text-muted); }
+    .case-chip {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 12px;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      white-space: nowrap;
+    }
+    .case-chip.basic { background: var(--success-light); color: var(--success); }
+    .case-chip.advanced { background: var(--warning-bg); color: #925400; }
+    .case-score-badge { font-size: 0.76rem; font-weight: 700; color: var(--success); }
+
+    .case-runner-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .case-progress { display: flex; gap: 6px; flex: 1; min-width: 180px; }
+    .case-progress .step-dot {
+      height: 6px;
+      border-radius: 3px;
+      background: var(--border);
+      flex: 1;
+      transition: background 0.2s;
+    }
+    .case-progress .step-dot.active { background: var(--primary); }
+    .case-progress .step-dot.done { background: var(--success); }
+
+    .patient-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      margin-bottom: 18px;
+    }
+    .patient-card h2 { font-size: 1.2rem; color: var(--primary-dark); margin-bottom: 4px; }
+    .patient-card .patient-sub { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 14px; }
+    .patient-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+    .patient-field h4 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted); margin-bottom: 4px; }
+    .patient-field p { font-size: 0.88rem; }
+    .vitals-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .vital-pill {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 0.78rem;
+    }
+    .vital-pill strong { display: block; font-size: 0.9rem; color: var(--primary-dark); }
+    .vital-pill.alert { border-color: var(--danger); background: var(--danger-light); }
+    .vital-pill.alert strong { color: var(--danger); }
+
+    .case-step {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      margin-bottom: 18px;
+    }
+    .case-step h3 { font-size: 1.05rem; margin-bottom: 4px; color: var(--text); }
+    .case-step .step-hint { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 14px; }
+    .case-option {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 11px 13px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: all 0.15s;
+      background: var(--card-bg);
+    }
+    .case-option:hover { border-color: var(--primary); background: var(--bg); }
+    .case-option input { margin-top: 3px; flex-shrink: 0; accent-color: var(--primary); width: 16px; height: 16px; }
+    .case-option .opt-text { font-size: 0.88rem; }
+    .case-option .opt-why { font-size: 0.8rem; margin-top: 6px; display: none; padding-top: 6px; border-top: 1px dashed var(--border); }
+    .case-option.revealed .opt-why { display: block; color: var(--text-muted); }
+    .case-option.correct { border-color: var(--success); background: var(--success-light); }
+    .case-option.correct .opt-why { display: block; color: var(--success); }
+    .case-option.wrong { border-color: var(--danger); background: var(--danger-light); }
+    .case-option.wrong .opt-why { display: block; color: var(--danger); }
+    .case-option.missed { border-color: #d8a000; background: var(--warning-bg); }
+    .case-option.missed .opt-why { display: block; color: #925400; }
+    .case-option.locked { cursor: default; }
+    .case-option.locked:hover { border-color: inherit; background: inherit; }
+
+    .case-step-actions { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+    .step-feedback { margin-top: 12px; padding: 12px 14px; border-radius: 8px; font-size: 0.86rem; display: none; }
+    .step-feedback.show { display: block; }
+    .step-feedback.good { background: var(--success-light); border-left: 4px solid var(--success); }
+    .step-feedback.partial { background: var(--warning-bg); border-left: 4px solid #d8a000; }
+    .step-feedback.bad { background: var(--danger-light); border-left: 4px solid var(--danger); }
+
+    .case-result {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      text-align: center;
+    }
+    .case-result .score-ring { font-size: 2.6rem; font-weight: 800; color: var(--primary); }
+    .case-result h3 { font-size: 1.25rem; margin: 6px 0; }
+    .case-result .verdict { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 16px; }
+    .case-takeaway {
+      text-align: left;
+      background: var(--primary-light);
+      border-left: 4px solid var(--primary);
+      border-radius: 6px;
+      padding: 14px 16px;
+      font-size: 0.88rem;
+      margin-bottom: 18px;
+    }
+    .case-takeaway h4 { color: var(--primary-dark); margin-bottom: 6px; }
+    .case-breakdown { text-align: left; margin-bottom: 18px; }
+    .case-breakdown .bd-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 640px) {
+      .cases-hero { padding: 18px; }
+      .case-runner-top { flex-direction: column; align-items: stretch; }
+    }
+
+    /* Print styles */
+    @media print {
+      body { background: white; color: black; font-size: 9pt; padding: 0; }
+      header, .header-actions, .nav-tabs, .search-box, .btn-copy, .disclaimer-banner, .btn, #casesView, .offline-chip { display: none !important; }
+      .container { max-width: 100%; margin: 0; padding: 0; }
+      .nosology-card { box-shadow: none; border: 1px solid #ccc; break-inside: avoid; margin-bottom: 15px; }
+      .nosology-header { background: #eee !important; color: black !important; }
+      th { background: #eee !important; color: black !important; }
+      .red-flags-box { border: 1px solid #000; background: #fff !important; }
+    }
+
+    /* Toast notification */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #333;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 6px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      font-size: 0.85rem;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s;
+      z-index: 1000;
+      pointer-events: none;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-top">
+      <div class="brand">
+        <div class="brand-icon">⚕️</div>
+        <div>
+          <h1>Шпаргалка участкового терапевта</h1>
+          <p>Назначения, дозировки и алгоритмы по КР МЗ РФ (2024–2026)</p>
+        </div>
+      </div>
+
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Поиск: препарат, МНН, синдром, симптом..." autocomplete="off">
+      </div>
+
+      <div class="header-actions">
+        <button class="btn" id="installBtn" title="Установить приложение на устройство" style="display: none;">⬇️ Установить</button>
+        <button class="btn" id="printBtn" title="Распечатать шпаргалку">🖨️ Печать</button>
+        <button class="btn" id="themeBtn" title="Переключить тему">🌓 Тема</button>
+      </div>
+    </div>
+
+    <div class="offline-chip" id="offlineChip" hidden>📴 Офлайн-режим — данные доступны без сети</div>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs" id="navTabs">
+      <button class="tab-btn active" data-tab="all">Все нозологии</button>
+      <button class="tab-btn" data-tab="orvi">ОРВИ и Грипп</button>
+      <button class="tab-btn" data-tab="ah">Артериальная гипертензия</button>
+      <button class="tab-btn" data-tab="dorsopathy">Дорсопатии (Спина)</button>
+      <button class="tab-btn" data-tab="gastritis">Гастрит и диспепсия</button>
+      <button class="tab-btn" data-tab="diarrhea">Острая диарея</button>
+      <button class="tab-btn" data-tab="diabetes">Сахарный диабет 2 типа</button>
+      <button class="tab-btn" data-tab="copd_asthma">ХОБЛ и астма</button>
+      <button class="tab-btn" data-tab="uti">Цистит и ИМП</button>
+      <button class="tab-btn" data-tab="gout">Подагра</button>
+      <button class="tab-btn" data-tab="calculators">🧮 Калькуляторы врача</button>
+      <button class="tab-btn" data-tab="cases">🎯 Клинические кейсы</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Clinical Disclaimer -->
+    <div class="disclaimer-banner">
+      <span>ℹ️ <strong>Для врачей и медицинских специалистов:</strong> Дозировки приведены в соответствии с актуальными Клиническими рекомендациями Минздрава РФ. Решение о назначении принимается лечащим врачом с учетом противопоказаний и индивидуального статуса пациента.</span>
+      <button style="background:none; border:none; cursor:pointer; font-size:1rem;" onclick="this.parentElement.style.display='none'">✕</button>
+    </div>
+
+    <!-- Content Area for Nosologies -->
+    <div id="contentArea"></div>
+
+    <!-- Calculators View (Hidden by default, shown when tab is active) -->
+    <div id="calculatorsView" style="display: none;">
+      <div class="calc-grid">
+        <!-- Calc 1: GFR CKD-EPI 2021 -->
+        <div class="calc-card">
+          <h3>📊 СКФ (CKD-EPI 2021) и коррекция доз</h3>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">Оценка функции почек для подбора доз иАПФ, НПВП и антибиотиков.</p>
+          <div class="form-group">
+            <label>Пол пациента:</label>
+            <select id="gfrGender">
+              <option value="male">Мужской</option>
+              <option value="female">Женский</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Возраст (лет):</label>
+            <input type="number" id="gfrAge" value="55" min="18" max="110">
+          </div>
+          <div class="form-group">
+            <label>Креатинин сыворотки (мкмоль/л):</label>
+            <input type="number" id="gfrCreatinine" value="95" min="20" max="1000">
+          </div>
+          <button class="btn btn-primary" onclick="calculateGFR()">Рассчитать СКФ</button>
+
+          <div class="calc-result" id="gfrResult" style="display: none;">
+            <div>СКФ: <strong id="gfrValue">--</strong> мл/мин/1.73 м²</div>
+            <div id="gfrStage" style="font-weight: 600; margin-top: 4px;">--</div>
+            <div id="gfrAdvice" style="font-size: 0.8rem; margin-top: 4px; color: var(--text);">--</div>
+          </div>
+        </div>
+
+        <!-- Calc 2: Oral Rehydration Volume -->
+        <div class="calc-card">
+          <h3>💧 Калькулятор объема пероральной регидратации</h3>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">Расчет раствора ОРС при острой диарее по стандартам ВОЗ.</p>
+          <div class="form-group">
+            <label>Масса тела пациента (кг):</label>
+            <input type="number" id="rehydrWeight" value="70" min="30" max="200">
+          </div>
+          <div class="form-group">
+            <label>Степень дегидратации:</label>
+            <select id="rehydrDegree">
+              <option value="mild">Легкая (жажда, потеря массы до 3-5%)</option>
+              <option value="moderate">Умеренная (сухость слизистых, тургор снижен, потеря 6-9%)</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" onclick="calculateRehydration()">Рассчитать объем ОРС</button>
+
+          <div class="calc-result" id="rehydrResult" style="display: none;">
+            <div>Объем на первые 4 часа: <strong id="rehydr4h">--</strong> мл</div>
+            <div style="margin-top: 4px;">Темп приема: <span id="rehydrRate">--</span> мл каждые 15 минут</div>
+            <div style="font-size: 0.8rem; margin-top: 6px; color: var(--text);">
+              + Дополнительно: <strong>150–250 мл</strong> раствора ОРС после каждого последующего жидкого стула.
+            </div>
+          </div>
+        </div>
+
+        <!-- Calc 3: Antipyretic Safe Dosing -->
+        <div class="calc-card">
+          <h3>💊 Дозирование жаропонижающих (ОРВИ / Боль)</h3>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">Точный расчет разовой и максимальной суточной дозы.</p>
+          <div class="form-group">
+            <label>Масса тела (кг):</label>
+            <input type="number" id="antipyreticWeight" value="70" min="20" max="150">
+          </div>
+          <div class="form-group">
+            <label>Препарат:</label>
+            <select id="antipyreticDrug">
+              <option value="paracetamol">Парацетамол (15 мг/кг, макс 1000 мг/прием)</option>
+              <option value="ibuprofen">Ибупрофен (10 мг/кг, макс 400 мг/прием)</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" onclick="calculateAntipyretic()">Рассчитать дозу</button>
+
+          <div class="calc-result" id="antipyreticResult" style="display: none;">
+            <div>Разовая доза: <strong id="antipyreticSingle">--</strong></div>
+            <div style="margin-top: 4px;">Максимальная суточная: <strong id="antipyreticDaily">--</strong></div>
+            <div id="antipyreticNotes" style="font-size: 0.8rem; margin-top: 6px;">--</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Clinical Cases Trainer View (Hidden by default) -->
+    <div id="casesView" style="display: none;">
+      <div id="casesListView">
+        <div class="cases-hero">
+          <h2>🎯 Тренажер клинических сценариев</h2>
+          <p>Интерактивный разбор реальных кейсов: оцените сигналы тревоги, поставьте диагноз и проверьте назначения. Каждый шаг сопровождается разбором ошибок со ссылкой на клинические рекомендации.</p>
+          <div class="cases-stats" id="casesStats"></div>
+        </div>
+        <div class="cases-filters" id="casesFilters"></div>
+        <div class="cases-grid" id="casesGrid"></div>
+      </div>
+      <div id="caseRunner" style="display: none;"></div>
+    </div>
+  </main>
+
+  <div class="toast" id="toastNotification">Назначение скопировано в буфер!</div>
+
+  <!-- Клинические кейсы (офлайн-библиотека, подключается как отдельный файл) -->
+  <script src="data/cases.js"></script>
+  <script>
+    // Embedded Data fallback for direct file:// execution
+    const inlineFallbackData = {
+      "metadata": {
+        "title": "Шпаргалка участкового терапевта по назначениям и дозировкам",
+        "version": "1.2.0",
+        "updated": "2026-11",
+        "standards": "Клинические рекомендации Минздрава РФ, РКО, РГА, РОИБ",
+        "targetAudience": "Врачи-терапевты, врачи общей практики (ВОП), ординаторы",
+        "features": [
+          "PWA: установка на смартфон и офлайн-режим",
+          "9 нозологий",
+          "Клинические калькуляторы",
+          "Интерактивный тренажер клинических кейсов"
+        ]
+      },
+      "nosologies": [
+        {
+          "id": "orvi",
+          "title": "ОРВИ и Грипп",
+          "code_mkb10": "J00-J06, J10-J11",
+          "summary": "Острые респираторные вирусные инфекции верхних и нижних дыхательных путей. Базис — симптоматическая терапия и гидратация. Системные антибиотики противопоказаны при неосложненном течении.",
+          "redFlags": [
+            "Одышка: ЧДД > 22 в мин в покое",
+            "Сатурация SpO2 < 95% на воздухе",
+            "Лихорадка > 38.5°C, длящаяся более 3–5 дней или не сбиваемая жаропонижающими",
+            "Вторая волна лихорадки после улучшения (признак пневмонии или синусита)",
+            "Боль в грудной клетке при дыхании, кровохарканье, спутанность сознания"
+          ],
+          "treatments": [
+            {
+              "group": "Жаропонижающие и анальгетики",
+              "inn": "Парацетамол",
+              "tradeNames": [
+                "Панадол",
+                "Эффералган"
+              ],
+              "dose": "500–1000 мг каждые 6–8 часов",
+              "maxDose": "4000 мг/сутки",
+              "notes": "Препарат выбора при язвенной болезни. При массе < 50 кг макс. 2000-3000 мг/сут.",
+              "isFirstLine": true
+            },
+            {
+              "group": "Жаропонижающие и анальгетики",
+              "inn": "Ибупрофен",
+              "tradeNames": [
+                "Нурофен",
+                "МИГ"
+              ],
+              "dose": "200–400 мг каждые 6–8 часов",
+              "maxDose": "1200 мг/сут без рецепта (до 2400 мг под наблюдением)",
+              "notes": "Принимать строго после еды. Осторожно при ХБП и гастрите.",
+              "isFirstLine": true
+            },
+            {
+              "group": "Этиотропная терапия: Грипп A и B",
+              "inn": "Осельтамивир",
+              "tradeNames": [
+                "Тамифлю",
+                "Номидес"
+              ],
+              "dose": "75 мг внутрь 2 раза в сутки",
+              "duration": "5 дней",
+              "notes": "Максимальный эффект при начале в первые 24–48 ч от первых симптомов.",
+              "isFirstLine": true
+            },
+            {
+              "group": "Деконгестанты (капли/спреи в нос)",
+              "inn": "Ксилометазолин 0.1%",
+              "tradeNames": [
+                "Снуп",
+                "Отривин",
+                "Тизин"
+              ],
+              "dose": "1–2 впрыскивания в каждый носовой ход 2–3 раза/сут",
+              "duration": "Строго не более 3–5 дней!",
+              "notes": "При превышении курса — риск медикаментозного ринита.",
+              "isFirstLine": false
+            },
+            {
+              "group": "Ирригационная терапия",
+              "inn": "Натрия хлорид 0.9% / 2.2%",
+              "tradeNames": [
+                "Аква Марис",
+                "Аквалор",
+                "Физиологический раствор"
+              ],
+              "dose": "Промывание носовых ходов 3–4 раза в сутки",
+              "notes": "Гипертонический раствор (2.2%) устраняет отек осмотическим путем.",
+              "isFirstLine": true
+            },
+            {
+              "group": "Боль в горле (НПВП местно)",
+              "inn": "Бензидамин 0.15%",
+              "tradeNames": [
+                "Тантум Верде",
+                "Ангидак"
+              ],
+              "dose": "4–8 распылений каждые 1.5–3 ч (курс до 7 дней)",
+              "notes": "Оказывает противовоспалительное и местноанестезирующее действие.",
+              "isFirstLine": true
+            }
+          ]
+        },
+        {
+          "id": "ah",
+          "title": "Артериальная гипертензия",
+          "code_mkb10": "I10, I11, I12, I13, I15",
+          "summary": "Хроническое стойкое повышение АД. Целевое АД для 18–65 лет: 120–129 / 70–79 мм рт. ст. Для ≥65 лет: САД 130–139 мм рт. ст. Старт — фиксированная комбинация из 2 препаратов в одной таблетке.",
+          "redFlags": [
+            "Внезапный подъем АД с острой загрудинной болью (подозрение на ОКС/инфаркт)",
+            "Очаговый неврологический дефицит, асимметрия лица, парезы (ОНМК / инсульт)",
+            "Острое удушье, клокочущее дыхание, положение ортопноэ (отек легких)",
+            "Разрывающая острая боль в груди с иррадиацией в спину (расслоение аорты)"
+          ],
+          "treatments": [
+            {
+              "group": "иАПФ (Ингибиторы АПФ)",
+              "inn": "Периндоприл",
+              "tradeNames": [
+                "Престариум"
+              ],
+              "dose": "Старт: 4–5 мг 1 р/сут утром; макс: 8–10 мг 1 р/сут",
+              "notes": "Контроль калия и креатинина. При сухом кашле — замена на сартаны.",
+              "isFirstLine": true
+            },
+            {
+              "group": "БРА (Сартаны)",
+              "inn": "Телмисартан",
+              "tradeNames": [
+                "Микардис"
+              ],
+              "dose": "Старт: 40 мг 1 р/сут; макс: 80 мг 1 р/сут",
+              "notes": "Период полувыведения >24 ч, метаболически благоприятен при диабете.",
+              "isFirstLine": true
+            },
+            {
+              "group": "БРА (Сартаны)",
+              "inn": "Лозартан",
+              "tradeNames": [
+                "Козаар",
+                "Лориста"
+              ],
+              "dose": "Старт: 50 мг 1 р/сут; макс: 100 мг 1 р/сут",
+              "notes": "Снижает мочевую кислоту (препарат выбора при подагре и гиперурикемии).",
+              "isFirstLine": true
+            },
+            {
+              "group": "Антагонисты кальция (АК)",
+              "inn": "Амлодипин",
+              "tradeNames": [
+                "Норваск",
+                "Амлодипин"
+              ],
+              "dose": "Старт: 5 мг 1 р/сут; макс: 10 мг 1 р/сут",
+              "notes": "Может вызывать отеки лодыжек (прекапиллярная вазодилатация).",
+              "isFirstLine": true
+            },
+            {
+              "group": "Антагонисты кальция (АК)",
+              "inn": "Лерканидипин",
+              "tradeNames": [
+                "Занидип",
+                "Леркамен"
+              ],
+              "dose": "Старт: 10 мг 1 р/сут; макс: 20 мг 1 р/сут",
+              "notes": "Сосудистая селективность; отеки лодыжек возникают значительно реже.",
+              "isFirstLine": true
+            },
+            {
+              "group": "Тиазидоподобные диуретики",
+              "inn": "Индапамид ретард",
+              "tradeNames": [
+                "Арифон ретард",
+                "Индапамид МВ"
+              ],
+              "dose": "1.5 мг 1 раз в сутки утром",
+              "notes": "Метаболически нейтрален, расширяет сосуды, кардиопротекция.",
+              "isFirstLine": true
+            },
+            {
+              "group": "Неотложная помощь при неосложненном кризе",
+              "inn": "Каптоприл",
+              "tradeNames": [
+                "Капотен"
+              ],
+              "dose": "25 мг сублингвально (рассосать под языком)",
+              "notes": "Снижать АД не более чем на 20–25% за первые 2 часа!",
+              "isFirstLine": false
+            },
+            {
+              "group": "Неотложная помощь при неосложненном кризе",
+              "inn": "Моксонидин",
+              "tradeNames": [
+                "Физиотенз"
+              ],
+              "dose": "0.2–0.4 мг под язык или внутрь",
+              "notes": "Агонист I1-имидазолиновых рецепторов, мягко снижает симпатический тонус.",
+              "isFirstLine": false
+            }
+          ]
+        },
+        {
+          "id": "dorsopathy",
+          "title": "Дорсопатии (Боль в спине)",
+          "code_mkb10": "M54, M54.5, M51, M42",
+          "summary": "Острая или хроническая неспецифическая скелетно-мышечная боль в спине и корешковые синдромы. Запрещен постельный режим >48 ч! Базис: НПВП коротким курсом + миорелаксанты + гастропротекция.",
+          "redFlags": [
+            "Синдром конского хвоста: острая задержка/недержание мочи, онемение промежности (седловидная анестезия)",
+            "Прогрессирующий моторный дефицит: парез стопы ('свисающая стопа')",
+            "Ночные непроходящие боли в покое в сочетании с онкологическим анамнезом",
+            "Лихорадка, озноб, резкая локальная боль остистого отростка (спондилодисцит)",
+            "Травма в анамнезе у пожилых (компрессионный перелом на фоне остеопороза)"
+          ],
+          "treatments": [
+            {
+              "group": "НПВП (ЦОГ-2 селективные)",
+              "inn": "Целекоксиб",
+              "tradeNames": [
+                "Целебрекс"
+              ],
+              "dose": "200 мг 1–2 раза в сутки внутрь",
+              "duration": "7–14 дней",
+              "notes": "Максимальная безопасность для ЖКТ. Препарат выбора при язвенном анамнезе.",
+              "isFirstLine": true
+            },
+            {
+              "group": "НПВП (умеренно селективные)",
+              "inn": "Мелоксикам",
+              "tradeNames": [
+                "Мовалис",
+                "Амелотекс"
+              ],
+              "dose": "В/м 15 мг/сут 1–2 дня, далее внутрь 7.5–15 мг 1 р/сут",
+              "duration": "7–10 дней",
+              "notes": "Сбалансированный анальгетический и противовоспалительный профиль.",
+              "isFirstLine": true
+            },
+            {
+              "group": "Миорелаксанты центрального действия",
+              "inn": "Толперизон",
+              "tradeNames": [
+                "Мидокалм",
+                "Калмирекс"
+              ],
+              "dose": "150 мг 3 р/сут внутрь (или 450 мг 1 р/сут депо)",
+              "duration": "10–14 дней",
+              "notes": "Не вызывает седации, разрешен водителям.",
+              "isFirstLine": true
+            },
+            {
+              "group": "Миорелаксанты центрального действия",
+              "inn": "Тизанидин",
+              "tradeNames": [
+                "Сирдалуд"
+              ],
+              "dose": "Старт: 2 мг на ночь; далее 2–4 мг 2–3 р/сут",
+              "duration": "7–14 дней",
+              "notes": "Выраженный седативный эффект. Оптимален при нарушении сна от боли.",
+              "isFirstLine": false
+            },
+            {
+              "group": "Гастропротекция",
+              "inn": "Омепразол / Пантопразол",
+              "tradeNames": [
+                "Омез",
+                "Нольпаза"
+              ],
+              "dose": "20 мг 1 р/сут утром за 30 мин до еды",
+              "notes": "Обязателен при возрасте >65 лет, язвенном анамнезе, сопутствующем аспирине.",
+              "isFirstLine": true
+            },
+            {
+              "group": "Корешковый синдром / Нейропатическая боль",
+              "inn": "Габапентин",
+              "tradeNames": [
+                "Тебантин",
+                "Конвалис",
+                "Нейронтин"
+              ],
+              "dose": "День 1: 300 мг на ночь; день 2: 300 мг 2 р; день 3: 300 мг 3 р; титрация до 900–1800 мг/сут",
+              "duration": "От 1 до 3 месяцев",
+              "notes": "Препарат 1 линии при нейропатической боли. Не отменять резко!",
+              "isFirstLine": true
+            }
+          ]
+        },
+        {
+          "id": "gastritis",
+          "title": "Гастрит и диспепсия",
+          "code_mkb10": "K29, K29.5, K30",
+          "summary": "Воспаление слизистой желудка и синдром функциональной диспепсии (эпигастральная боль или постпрандиальный дистресс). При H. pylori — обязательная 14-дневная квадротерапия с висмутом.",
+          "redFlags": [
+            "Дисфагия (затруднение проглатывания пищи) или одинофагия",
+            "Желудочно-кишечное кровотечение: рвота 'кофейной гущей', черный дегтеобразный стул (мелена)",
+            "Немотивированное прогрессирующее снижение массы тела",
+            "Необъяснимая железодефицитная анемия",
+            "Впервые возникшие симптомы диспепсии в возрасте старше 45–50 лет"
+          ],
+          "treatments": [
+            {
+              "group": "Эрадикация H. pylori (Компонент 1: ИПП)",
+              "inn": "Рабепразол / Эзомепразол",
+              "tradeNames": [
+                "Париет",
+                "Разо",
+                "Нексиум"
+              ],
+              "dose": "20 мг 2 раза в сутки за 30 мин до еды",
+              "duration": "14 дней",
+              "notes": "Мощное подавление кислотности для стабильности антибиотиков.",
+              "isFirstLine": true
+            },
+            {
+              "group": "Эрадикация H. pylori (Компонент 2: Антибиотик)",
+              "inn": "Амоксициллин",
+              "tradeNames": [
+                "Флемоксин Солютаб",
+                "Амоксициллин"
+              ],
+              "dose": "1000 мг 2 раза в сутки после еды",
+              "duration": "14 дней",
+              "notes": "Резистентность в РФ минимальна (<2%).",
+              "isFirstLine": true
+            },
+            {
+              "group": "Эрадикация H. pylori (Компонент 3: Антибиотик)",
+              "inn": "Кларитромицин",
+              "tradeNames": [
+                "Клацид"
+              ],
+              "dose": "500 мг 2 раза в сутки во время еды",
+              "duration": "14 дней",
+              "notes": "При аллергии на пенициллины заменяется на метронидазол + тетрациклин.",
+              "isFirstLine": true
+            },
+            {
+              "group": "Эрадикация H. pylori (Компонент 4: Висмут)",
+              "inn": "Висмута трикалия дицитрат",
+              "tradeNames": [
+                "Де-Нол",
+                "Улькавис"
+              ],
+              "dose": "240 мг 2 р/сут (или 120 мг 4 р/сут) за 30 мин до еды",
+              "duration": "14 дней",
+              "notes": "Окрашивает кал в черный цвет (предупредить пациента!). Преодолевает резистентность к кларитромицину.",
+              "isFirstLine": true
+            },
+            {
+              "group": "Прокинетики (при тяжести и переполнении PDS)",
+              "inn": "Итоприда гидрохлорид",
+              "tradeNames": [
+                "Ганатон",
+                "Итомед"
+              ],
+              "dose": "50 мг 3 раза в сутки до еды",
+              "duration": "3–6 недель",
+              "notes": "Не удлиняет QT-интервал и не вызывает гиперпролактинемии.",
+              "isFirstLine": true
+            },
+            {
+              "group": "Альгинаты (купирование изжоги и боли)",
+              "inn": "Натрия альгинат + Кальция карбонат",
+              "tradeNames": [
+                "Гевискон"
+              ],
+              "dose": "10–20 мл через 40 мин после еды и на ночь",
+              "notes": "Формирует антирефлюксный альгинатный барьер.",
+              "isFirstLine": false
+            }
+          ]
+        },
+        {
+          "id": "diarrhea",
+          "title": "Острая диарея у взрослых",
+          "code_mkb10": "A09, K52, A04",
+          "summary": "Острое учащение стула жидкой консистенции. Золотой стандарт: пероральная регидратация + энтеросорбенты + S. boulardii. Лоперамид категорически запрещен при крови в кале и лихорадке!",
+          "redFlags": [
+            "Примесь крови, гноя или обильной слизи в кале (инвазивный колит)",
+            "Лихорадка > 38.5°C с выраженной интоксикацией",
+            "Тяжелое обезвоживание: анурия/олигурия, запавшие глаза, падение АД < 90 мм рт. ст.",
+            "Неукротимая рвота (невозможность пить растворы солей)",
+            "Связь с недавним приемом антибиотиков (подозрение на колит Clostridioides difficile)"
+          ],
+          "treatments": [
+            {
+              "group": "Пероральная регидратация (БАЗИС)",
+              "inn": "Пероральные регидратационные соли (ОРС)",
+              "tradeNames": [
+                "Регидрон Био",
+                "ОРС",
+                "Адиарин"
+              ],
+              "dose": "50–100 мл каждые 10–15 минут дробно; 150–250 мл на каждый эпизод стула",
+              "notes": "Основа спасения жизни и профилактики ОПП. Растворять строго по инструкции.",
+              "isFirstLine": true
+            },
+            {
+              "group": "Энтеросорбенты",
+              "inn": "Смектит диоктаэдрический",
+              "tradeNames": [
+                "Смекта"
+              ],
+              "dose": "3 г (1 пакетик) 3 раза в сутки",
+              "notes": "Интервал с любыми другими лекарствами не менее 1.5–2 часов!",
+              "isFirstLine": true
+            },
+            {
+              "group": "Пробиотики / Биоэнтеросептики",
+              "inn": "Saccharomyces boulardii",
+              "tradeNames": [
+                "Энтерол"
+              ],
+              "dose": "250–500 мг 2 раза в сутки за 1 час до еды",
+              "duration": "5–7 дней",
+              "notes": "Устойчив к антибиотикам, расщепляет токсины бактерий, стимулирует IgA.",
+              "isFirstLine": true
+            },
+            {
+              "group": "Кишечные антисептики",
+              "inn": "Рифаксимин",
+              "tradeNames": [
+                "Альфа Нормикс"
+              ],
+              "dose": "200 мг каждые 8 часов (или 400 мг 2 р/сут)",
+              "duration": "3 дня",
+              "notes": "Не всасывается в кровь (<1%). Препарат выбора при бактериальной диарее путешественников.",
+              "isFirstLine": true
+            },
+            {
+              "group": "Антидиарейные (моторные) средства",
+              "inn": "Лоперамид",
+              "tradeNames": [
+                "Имодиум",
+                "Лопедиум"
+              ],
+              "dose": "Старт: 4 мг, далее по 2 мг после каждого жидкого стула (макс. 12 мг/сут)",
+              "notes": "ПРОТИВОПОКАЗАН при кровавом стуле, лихорадке и подозрении на инфекционный колит!",
+              "isFirstLine": false
+            }
+          ]
+        },
+        {
+          "id": "diabetes",
+          "title": "Сахарный диабет 2 типа",
+          "code_mkb10": "E11, E11.9",
+          "summary": "Хроническая гипергликемия при СД 2 типа. Диагноз: HbA1c ≥ 6.5%, глюкоза натощак ≥ 7.0 ммоль/л или через 2 ч ОГТТ ≥ 11.1 ммоль/л (подтверждение в двух анализах). Цель HbA1c для большинства — < 7.0%. Метформин — 1-я линия; при ССЗ, ХСН, ХБП и альбуминурии приоритет — SGLT2i или ГПП-1 РА независимо от HbA1c.",
+          "redFlags": [
+            "Гипергликемия > 15–20 ммоль/л + жажда, полиурия, тошнота, боль в животе, дыхание Куссмауля (ДКА / гиперосмолярное состояние)",
+            "Гипогликемия < 3.9 ммоль/л с нарушением сознания, судорогами или невозможностью самостоятельно принять углеводы",
+            "Синдром диабетической стопы: язва, некроз, гнойное отделяемое, гиперемия и запах (риск ампутации)",
+            "Внезапное снижение зрения или боль в глазу (ретинопатия, неоваскулярная глаукома)",
+            "Атипичный/безболевой вариант ОКС: одышка, слабость, боль в эпигастрии у пациента с СД и высоким риском",
+            "eGFR < 30 или быстрое снижение функции почек (метформин противопоказан, нужна коррекция сахароснижающих доз)"
+          ],
+          "treatments": [
+            {
+              "group": "Бигуаниды (препарат 1-й линии)",
+              "inn": "Метформин",
+              "tradeNames": [
+                "Глюкофаж",
+                "Сиофор",
+                "Метфогамма"
+              ],
+              "dose": "Старт 500 мг 1–2 р/сут во время еды; титрация каждые 1–2 нед до 1000 мг 2 р/сут (макс. 2550–3000 мг/сут)",
+              "notes": "Не вызывает гипогликемий, нейтрален по весу. Противопоказан при eGFR < 30; при eGFR 30–44 — не более 1000 мг/сут. Отменить за 48 ч до КТ с контрастом и при острых состояниях с риском гипоперфузии.",
+              "isFirstLine": true
+            },
+            {
+              "group": "SGLT2-ингибиторы (кардио- и нефропротекция)",
+              "inn": "Эмпаглифлозин",
+              "tradeNames": [
+                "Джардинс"
+              ],
+              "dose": "10 мг 1 р/сут утром (при необходимости 25 мг)",
+              "notes": "Приоритет при ССЗ, ХСН и ХБП независимо от HbA1c. Риск урогенитальных микозов и эугликемического кетоацидоза. Не начинать при eGFR < 20.",
+              "isFirstLine": true
+            },
+            {
+              "group": "SGLT2-ингибиторы (кардио- и нефропротекция)",
+              "inn": "Дапаглифлозин",
+              "tradeNames": [
+                "Форсига"
+              ],
+              "dose": "10 мг 1 р/сут утром",
+              "notes": "Снижает риск госпитализаций при ХСН и прогрессирование ХБП. Обучить пациента правилам «sick day» (отмена при дегидратации, голодании, острых заболеваниях).",
+              "isFirstLine": true
+            },
+            {
+              "group": "Агонисты рецепторов ГПП-1 (снижение веса и СС-риска)",
+              "inn": "Семаглутид",
+              "tradeNames": [
+                "Оземпик",
+                "Семавик"
+              ],
+              "dose": "Старт 0.25 мг п/к 1 раз в неделю; титрация каждые 4 нед до 1.0 мг/нед",
+              "notes": "Выраженное снижение массы тела и СС-риска, приоритет при ХБП. Осторожно при панкреатите, гастропарезе, МЭН 2 типа в анамнезе.",
+              "isFirstLine": false
+            },
+            {
+              "group": "Ингибиторы ДПП-4 (метаболически нейтральные)",
+              "inn": "Ситаглиптин",
+              "tradeNames": [
+                "Янувия"
+              ],
+              "dose": "100 мг 1 р/сут; при eGFR 30–44 — 50 мг, при eGFR < 30 — 25 мг",
+              "notes": "Низкий риск гипогликемии, не влияет на вес. Не комбинировать с ГПП-1 РА.",
+              "isFirstLine": false
+            },
+            {
+              "group": "Сульфонилурея (резерв, риск гипогликемии)",
+              "inn": "Гликлазид МВ",
+              "tradeNames": [
+                "Диабетон МВ"
+              ],
+              "dose": "Старт 30 мг 1 р/сут утром; титрация до 60–120 мг 1 р/сут",
+              "notes": "Дешев, но вызывает гипогликемию и прибавку веса. Избегать у пожилых, при ХБП и низком комплаенсе.",
+              "isFirstLine": false
+            },
+            {
+              "group": "Профилактика сердечно-сосудистых осложнений",
+              "inn": "Аторвастатин",
+              "tradeNames": [
+                "Липримар",
+                "Аторис"
+              ],
+              "dose": "20–40 мг 1 р/сут вечером (при высоком риске — до 80 мг)",
+              "notes": "Статин показан большинству пациентов с СД 2 типа. Цель ЛПНП < 1.8 ммоль/л при высоком риске и < 1.4 ммоль/л при очень высоком.",
+              "isFirstLine": true
+            },
+            {
+              "group": "Нефропротекция при альбуминурии",
+              "inn": "Рамиприл / Лозартан",
+              "tradeNames": [
+                "Тритаце",
+                "Козаар",
+                "Лориста"
+              ],
+              "dose": "Рамиприл 5–10 мг 1 р/сут или лозартан 50–100 мг 1 р/сут",
+              "notes": "Показаны при АГ и/или альбуминурии (uACR ≥ 30 мг/г). Контроль калия и креатинина через 1–2 нед после начала.",
+              "isFirstLine": true
+            }
+          ]
+        },
+        {
+          "id": "copd_asthma",
+          "title": "ХОБЛ и бронхиальная астма",
+          "code_mkb10": "J44, J45, J46",
+          "summary": "ХОБЛ — стойкая обструкция (постбронходилатационный ОФВ1/ФЖЕЛ < 0.70) с симптомами и факторами риска (курение). Астма — вариабельные симптомы + обратимая обструкция (прирост ОФВ1 ≥ 12% и ≥ 200 мл) и/или вариабельность ПСВ. База: отказ от курения, вакцинация, ингаляционные бронходилататоры; при астме — обязательная базисная ИГКС-терапия.",
+          "redFlags": [
+            "Тяжелое обострение: невозможность говорить фразами, ЧДД > 30, ЧСС > 120, участие вспомогательной мускулатуры, парадоксальное дыхание",
+            "SpO2 < 90–92% на воздухе, цианоз, спутанность сознания, сонливость (гипоксическая энцефалопатия, гиперкапния)",
+            "«Немое легкое» — резкое ослабление дыхательных шумов и хрипов при нарастающей одышке (критическое сужение бронхов)",
+            "ПСВ < 50% от лучшего показателя или отсутствие ответа на сальбутамол в течение 15–20 мин",
+            "Лихорадка с гнойной мокротой и усилением одышки (бактериальное обострение ХОБЛ)",
+            "Боль в груди при дыхании, асимметрия дыхания (пневмоторакс), отсутствие эффекта от терапии и истощение пациента"
+          ],
+          "treatments": [
+            {
+              "group": "Бронходилататоры короткого действия (неотложно / по требованию)",
+              "inn": "Сальбутамол",
+              "tradeNames": [
+                "Вентолин",
+                "Саламол"
+              ],
+              "dose": "2–4 вдоха (100 мкг/вдох) по потребности; при обострении — 2–4 вдоха каждые 20 мин 3 раза через спейсер",
+              "notes": "Препарат скорой помощи. Частое использование > 2 раз/нед при астме — признак плохого контроля. При тяжелом обострении — небулайзер 2.5–5 мг.",
+              "isFirstLine": true
+            },
+            {
+              "group": "Длительно действующие бронходилататоры (ХОБЛ)",
+              "inn": "Тиотропий",
+              "tradeNames": [
+                "Спирива"
+              ],
+              "dose": "18 мкг 1 р/сут (или 2.5 мкг через Респимат 1 р/сут)",
+              "notes": "LAMA — основа поддерживающей терапии ХОБЛ. Осторожно при глаукоме закрытого угла и задержке мочеиспускания.",
+              "isFirstLine": true
+            },
+            {
+              "group": "Двойная бронходилатация (ХОБЛ, группа B/E)",
+              "inn": "Формотерол + гликопирроний",
+              "tradeNames": [
+                "Бевеспи",
+                "Спиолто Респимат"
+              ],
+              "dose": "1–2 вдоха 2 р/сут",
+              "notes": "Комбинация LABA + LAMA — приоритет при выраженных симптомах и частых обострениях. Не заменяет ИГКС у пациентов с астмой.",
+              "isFirstLine": true
+            },
+            {
+              "group": "ИГКС-содержащая терапия астмы",
+              "inn": "Будесонид + формотерол",
+              "tradeNames": [
+                "Симбикорт Турбухалер",
+                "Формисонид"
+              ],
+              "dose": "Поддерживающая терапия: 160/4.5 мкг по 1–2 вдоха 2 р/сут; режим MART — + по требованию",
+              "notes": "Схема «поддержка + по требованию» снижает риск обострений. ИГКС — обязательный компонент базисной терапии астмы.",
+              "isFirstLine": true
+            },
+            {
+              "group": "Базисная терапия астмы (низкие дозы)",
+              "inn": "Будесонид",
+              "tradeNames": [
+                "Пульмикорт Турбухалер"
+              ],
+              "dose": "200–400 мкг/сут в 1–2 приема (низкие дозы)",
+              "notes": "Минимальная эффективная доза ИГКС. После ингаляции прополоскать рот для профилактики кандидоза.",
+              "isFirstLine": true
+            },
+            {
+              "group": "Обострение ХОБЛ / астмы (системные ГКС)",
+              "inn": "Преднизолон",
+              "tradeNames": [
+                "Преднизолон"
+              ],
+              "dose": "40 мг внутрь 1 р/сут утром",
+              "duration": "5 дней (ХОБЛ); 5–7 дней (астма)",
+              "notes": "Не требует постепенного снижения при коротком курсе. Одновременно — бронхолитики и кислород.",
+              "isFirstLine": true
+            },
+            {
+              "group": "Бактериальное обострение ХОБЛ",
+              "inn": "Амоксициллин + клавулановая кислота",
+              "tradeNames": [
+                "Аугментин",
+                "Флемоклав Солютаб"
+              ],
+              "dose": "875/125 мг 2 р/сут внутрь",
+              "duration": "5–7 дней",
+              "notes": "Показан при усилении одышки + увеличении объема и гнойности мокроты. При аллергии на пенициллины — доксициклин или макролид с учетом резистентности.",
+              "isFirstLine": false
+            },
+            {
+              "group": "Оксигенотерапия",
+              "inn": "Кислород увлажненный",
+              "tradeNames": [
+                "O2"
+              ],
+              "dose": "ХОБЛ: целевая SpO2 88–92%; астма: 93–95%",
+              "notes": "При ХОБЛ высокий поток O2 может усугубить гиперкапнию. Титовать по газометрии и клинике.",
+              "isFirstLine": true
+            }
+          ]
+        },
+        {
+          "id": "uti",
+          "title": "Цистит и инфекции мочевых путей",
+          "code_mkb10": "N30, N39.0",
+          "summary": "Неосложненная ИМП у небеременных женщин: дизурия, частое мочеиспускание, надлобковая боль без лихорадки и болей в пояснице. Препараты 1-й линии — нитрофурантоин или фосфомицин. Фторхинолоны — резерв. У мужчин, беременных, при лихорадке, камнях и катетере ИМП считается осложненной.",
+          "redFlags": [
+            "Лихорадка ≥ 38°C, озноб, боль в пояснице, болезненность при поколачивании по пояснице (пиелонефрит, риск сепсиса)",
+            "Тошнота и рвота, невозможность принимать таблетки внутрь (нужна парентеральная терапия)",
+            "Мужской пол, беременность, мочевые камни, катетер, иммуносупрессия, недавняя урологическая манипуляция (осложненная ИМП)",
+            "Септические признаки: гипотензия, тахикардия, спутанность сознания, олигурия",
+            "Макрогематурия, острая задержка мочи, подозрение на абсцесс почки или обструкцию",
+            "Рецидив > 3 эпизодов за год или сохранение симптомов после курса лечения (нужны посев и уролог)"
+          ],
+          "treatments": [
+            {
+              "group": "Препарат 1-й линии при неосложненном цистите",
+              "inn": "Нитрофурантоин",
+              "tradeNames": [
+                "Фурадонин",
+                "Фурамаг"
+              ],
+              "dose": "100 мг 2 р/сут внутрь во время еды",
+              "duration": "5 дней",
+              "notes": "Не проникает в ткань почки — не применять при пиелонефрите. Противопоказан при eGFR < 30, дефиците Г6ФД, в конце беременности. Окрашивает мочу в темный цвет.",
+              "isFirstLine": true
+            },
+            {
+              "group": "Препарат 1-й линии при неосложненном цистите",
+              "inn": "Фосфомицин трометамол",
+              "tradeNames": [
+                "Монурал"
+              ],
+              "dose": "3 г однократно внутрь, растворить в 100–200 мл воды",
+              "notes": "Однократный прием повышает приверженность. Не применять при пиелонефрите. Принимать натощак, за 2–3 ч до или после еды.",
+              "isFirstLine": true
+            },
+            {
+              "group": "Альтернатива при чувствительности возбудителя",
+              "inn": "Ко-тримоксазол",
+              "tradeNames": [
+                "Бисептол"
+              ],
+              "dose": "960 мг 2 р/сут внутрь",
+              "duration": "3 дня",
+              "notes": "Только если локальная резистентность E. coli < 20% и нет аллергии. Контроль калия и креатинина.",
+              "isFirstLine": false
+            },
+            {
+              "group": "Осложненная ИМП / пиелонефрит (парентерально)",
+              "inn": "Цефтриаксон",
+              "tradeNames": [
+                "Роцефин",
+                "Цефтриаксон"
+              ],
+              "dose": "1–2 г в/в или в/м 1 р/сут",
+              "duration": "10–14 дней (с возможным переходом на пероральный препарат)",
+              "notes": "Перед началом — посев мочи и крови. При обструкции необходима срочная урологическая помощь (стент/нефростома).",
+              "isFirstLine": true
+            },
+            {
+              "group": "Осложненная ИМП (пероральный резерв)",
+              "inn": "Ципрофлоксацин",
+              "tradeNames": [
+                "Ципролет",
+                "Ципрофлоксацин"
+              ],
+              "dose": "500 мг 2 р/сут внутрь",
+              "duration": "7 дней",
+              "notes": "Резерв из-за риска резистентности и побочных эффектов (QT, сухожилия, ЦНС). Не применять при неосложненном цистите.",
+              "isFirstLine": false
+            },
+            {
+              "group": "Симптоматическая помощь при дизурии",
+              "inn": "Феназопиридин",
+              "tradeNames": [
+                "Уро-Блау",
+                "Пиридиум"
+              ],
+              "dose": "200 мг 3 р/сут после еды",
+              "duration": "Не более 2 дней",
+              "notes": "Только симптоматически, не лечит инфекцию. Противопоказан при дефиците Г6ФД и почечной недостаточности. Окрашивает мочу в оранжевый цвет.",
+              "isFirstLine": false
+            },
+            {
+              "group": "Немедикаментозная поддержка",
+              "inn": "Адекватная гидратация",
+              "tradeNames": [
+                "Вода"
+              ],
+              "dose": "1.5–2.5 л жидкости в сутки при отсутствии противопоказаний",
+              "notes": "Не заменяет антибиотик, но уменьшает дискомфорт. Обучить пациента: не откладывать мочеиспускание, мочиться после полового акта.",
+              "isFirstLine": true
+            }
+          ]
+        },
+        {
+          "id": "gout",
+          "title": "Подагра",
+          "code_mkb10": "M10, M10.0, M10.3",
+          "summary": "Кристаллическая артропатия с гиперурикемией (ураты > 420 мкмоль/л) и рецидивирующим острым артритом, чаще I плюснефалангового сустава. В остром периоде — НПВП, колхицин или системные ГКС. Уратснижающая терапия (аллопуринол/фебуксостат) — при рецидивах, тофусах, уролитиазе; цель уратов < 360 мкмоль/л (< 300 при тофусах).",
+          "redFlags": [
+            "Острый моноартрит с лихорадкой, ознобом и выраженной интоксикацией — исключить септический артрит (диагностическая пункция сустава!)",
+            "Боль в пояснице, гематурия, тошнота — почечная колика / уратный уролитиаз",
+            "Олигурия, рост креатинина на фоне НПВП или диуретиков — острое повреждение почек",
+            "Изъязвление или расплавление тофуса, гнойное отделяемое, целлюлит вокруг сустава",
+            "Лихорадка + боль в спине (подагрический спондилит) или боль в груди (редкая подагра грудино-ключичного сочленения)",
+            "Сыпь, эозинофилия, лихорадка и поражение печени/почек на аллопуриноле — синдром гиперчувствительности (DRESS), немедленная отмена"
+          ],
+          "treatments": [
+            {
+              "group": "Острый приступ: НПВП",
+              "inn": "Напроксен",
+              "tradeNames": [
+                "Налгезин",
+                "Напроксен"
+              ],
+              "dose": "500 мг 2 р/сут внутрь после еды",
+              "duration": "5–7 дней",
+              "notes": "Начинать как можно раньше. При язвенном анамнезе — ИПП. Противопоказан при eGFR < 30, ХСН и антикоагулянтах.",
+              "isFirstLine": true
+            },
+            {
+              "group": "Острый приступ: колхицин (низкие дозы)",
+              "inn": "Колхицин",
+              "tradeNames": [
+                "Колхицин"
+              ],
+              "dose": "0.5 мг 2–3 р/сут; в первый день возможна нагрузочная доза 1 мг, далее 0.5 мг 2 р/сут",
+              "duration": "До купирования, обычно 3–5 дней",
+              "notes": "Низкие дозы эффективны и лучше переносятся. Диарея — сигнал к снижению дозы. Коррекция при ХБП, печеночной недостаточности и с ингибиторами CYP3A4/P-gp.",
+              "isFirstLine": true
+            },
+            {
+              "group": "Острый приступ при противопоказаниях к НПВП/колхицину",
+              "inn": "Преднизолон",
+              "tradeNames": [
+                "Преднизолон"
+              ],
+              "dose": "30–35 мг 1 р/сут внутрь",
+              "duration": "5 дней",
+              "notes": "Альтернатива при ХБП, язвенной болезни, антикоагулянтах. При сахарном диабете — контроль гликемии.",
+              "isFirstLine": false
+            },
+            {
+              "group": "Уратснижающая терапия (1-я линия)",
+              "inn": "Аллопуринол",
+              "tradeNames": [
+                "Аллопуринол",
+                "Милурит"
+              ],
+              "dose": "Старт 100 мг 1 р/сут (50 мг при ХБП); титрация каждые 2–4 нед до уратов < 360 мкмоль/л, обычно 300–600 мг/сут",
+              "notes": "Не отменять при приступе, если пациент уже принимает. Профилактика обострений — колхицин 0.5 мг/сут 3–6 мес. Титровать по уратам, а не по дозе.",
+              "isFirstLine": true
+            },
+            {
+              "group": "Уратснижающая терапия (при непереносимости аллопуринола)",
+              "inn": "Фебуксостат",
+              "tradeNames": [
+                "Аденурик"
+              ],
+              "dose": "40 мг 1 р/сут; при недостаточном эффекте — 80 мг, максимум 120 мг/сут",
+              "duration": "Длительно",
+              "notes": "Осторожно при ССЗ. Не назначать одновременно с аллопуринолом. Контроль уратов через 2–4 нед.",
+              "isFirstLine": false
+            },
+            {
+              "group": "Коррекция сопутствующей терапии",
+              "inn": "Замена тиазидного диуретика",
+              "tradeNames": [
+                "Лозартан",
+                "Амлодипин"
+              ],
+              "dose": "Например, лозартан 50–100 мг 1 р/сут вместо гидрохлоротиазида",
+              "notes": "Тиазиды и петлевые диуретики повышают ураты. Лозартан и фенофибрат умеренно снижают урат. Низкие дозы аспирина для ССЗ не отменять.",
+              "isFirstLine": true
+            },
+            {
+              "group": "Немедикаментозные меры",
+              "inn": "Диета и образ жизни",
+              "tradeNames": [
+                "Гидратация"
+              ],
+              "dose": "Ограничить алкоголь (особенно пиво), сахаросодержащие напитки, субпродукты и мясные бульоны; 2–2.5 л воды в сутки",
+              "notes": "Снижение веса — постепенное, без голодания (голодание провоцирует приступ). Вишня/вишневый сок — вспомогательная мера.",
+              "isFirstLine": true
+            }
+          ]
+        }
+      ]
+    };
+    let activeTab = 'all';
+
+    // Elements
+    const contentArea = document.getElementById('contentArea');
+    const calculatorsView = document.getElementById('calculatorsView');
+    const casesView = document.getElementById('casesView');
+    const casesListView = document.getElementById('casesListView');
+    const caseRunner = document.getElementById('caseRunner');
+    const casesGrid = document.getElementById('casesGrid');
+    const casesFilters = document.getElementById('casesFilters');
+    const casesStats = document.getElementById('casesStats');
+    const searchInput = document.getElementById('searchInput');
+    const navTabs = document.getElementById('navTabs');
+    const toast = document.getElementById('toastNotification');
+    const offlineChip = document.getElementById('offlineChip');
+    const installBtn = document.getElementById('installBtn');
+
+    // Show Toast
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    // Copy to clipboard
+    function copyPrescription(inn, dose, notes) {
+      const text = `${inn} — ${dose}. Примечание: ${notes}`;
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(`Скопировано: ${inn}`);
+      }).catch(() => {
+        showToast('Не удалось скопировать');
+      });
+    }
+
+    // Fetch or Load Data
+    async function loadData() {
+      try {
+        const response = await fetch('data/guidelines.json');
+        clinicalData = await response.json();
+      } catch (e) {
+        console.warn('Loading fallback inline data due to local file context');
+        clinicalData = inlineFallbackData;
+      }
+      renderNosologies();
+    }
+
+    // Render Nosologies
+    function renderNosologies(searchTerm = '') {
+      if (!clinicalData) return;
+
+      const showCases = activeTab === 'cases';
+
+      contentArea.style.display = (!showCases && activeTab !== 'calculators') ? 'block' : 'none';
+      calculatorsView.style.display = activeTab === 'calculators' ? 'block' : 'none';
+      casesView.style.display = showCases ? 'block' : 'none';
+
+      if (activeTab === 'calculators') {
+        return;
+      }
+
+      if (showCases) {
+        renderCasesList();
+        return;
+      }
+
+      const term = searchTerm.toLowerCase().trim();
+      let html = '';
+
+      clinicalData.nosologies.forEach(n => {
+        if (activeTab !== 'all' && n.id !== activeTab) return;
+
+        // Filter treatments if search term
+        const matchingTreatments = n.treatments.filter(t => {
+          if (!term) return true;
+          return t.inn.toLowerCase().includes(term) ||
+                 t.group.toLowerCase().includes(term) ||
+                 (t.tradeNames && t.tradeNames.some(tr => tr.toLowerCase().includes(term))) ||
+                 t.notes.toLowerCase().includes(term);
+        });
+
+        const matchingRedFlags = n.redFlags.filter(rf => {
+          if (!term) return true;
+          return rf.toLowerCase().includes(term);
+        });
+
+        const matchesNosologyTitle = n.title.toLowerCase().includes(term) || n.summary.toLowerCase().includes(term);
+
+        if (term && !matchesNosologyTitle && matchingTreatments.length === 0 && matchingRedFlags.length === 0) {
+          return; // Skip this card if nothing matched
+        }
+
+        const treatmentsToShow = (term && !matchesNosologyTitle) ? matchingTreatments : n.treatments;
+
+        html += `
+          <section class="nosology-card" id="card-${n.id}">
+            <div class="nosology-header">
+              <h2><span>🩺</span> ${n.title}</h2>
+              <span class="badge-code">МКБ-10: ${n.code_mkb10}</span>
+            </div>
+
+            <div class="nosology-body">
+              <p class="nosology-summary">${n.summary}</p>
+
+              <!-- Red Flags Box -->
+              <div class="red-flags-box">
+                <h4>🚨 Сигналы тревоги (Red Flags) — Показания к госпитализации / экстренному дообследованию:</h4>
+                <ul class="red-flags-list">
+                  ${n.redFlags.map(rf => `<li>${rf}</li>`).join('')}
+                </ul>
+              </div>
+
+              <!-- Treatment Table -->
+              <h4 style="margin-top: 15px; margin-bottom: 8px; color: var(--text);">Фармакотерапия и дозировки:</h4>
+              <div class="table-responsive">
+                <table>
+                  <thead>
+                    <tr>
+                      <th style="width: 22%;">Группа / Статус</th>
+                      <th style="width: 26%;">МНН и торговые названия</th>
+                      <th style="width: 24%;">Режим дозирования</th>
+                      <th style="width: 22%;">Клинические примечания</th>
+                      <th style="width: 6%;">Действие</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${treatmentsToShow.map(t => `
+                      <tr>
+                        <td>
+                          ${t.isFirstLine ? '<span class="badge-firstline">⭐ 1-я Линия</span>' : '<span class="badge-reserve">Резерв / Симптом</span>'}<br>
+                          <small style="color: var(--text-muted);">${t.group}</small>
+                        </td>
+                        <td>
+                          <div class="drug-name">${t.inn}</div>
+                          ${t.tradeNames ? `<div class="trade-names">Торг.: ${t.tradeNames.join(', ')}</div>` : ''}
+                        </td>
+                        <td>
+                          <div class="dosage-text">${t.dose}</div>
+                          ${t.duration ? `<small style="color: var(--text-muted);">Курс: ${t.duration}</small>` : ''}
+                        </td>
+                        <td>
+                          <div class="notes-text">${t.notes}</div>
+                        </td>
+                        <td>
+                          <button class="btn-copy" onclick="copyPrescription('${t.inn.replace(/'/g, "\\'")}', '${t.dose.replace(/'/g, "\\'")}', '${t.notes.replace(/'/g, "\\'")}')" title="Скопировать рецепт">📋</button>
+                        </td>
+                      </tr>
+                    `).join('')}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+        `;
+      });
+
+      if (!html) {
+        html = `
+          <div style="text-align: center; padding: 40px; color: var(--text-muted);">
+            <h3>🔍 Ничего не найдено по запросу «${searchTerm}»</h3>
+            <p>Попробуйте ввести международное название (МНН), торговое наименование или симптом.</p>
+          </div>
+        `;
+      }
+
+      contentArea.innerHTML = html;
+    }
+
+    // Tab switching
+    navTabs.addEventListener('click', (e) => {
+      const btn = e.target.closest('.tab-btn');
+      if (!btn) return;
+      activateTab(btn.getAttribute('data-tab'));
+    });
+
+    function activateTab(tab, updateHash = true) {
+      const btn = document.querySelector(`.tab-btn[data-tab="${tab}"]`);
+      if (!btn) tab = 'all';
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      (document.querySelector(`.tab-btn[data-tab="${tab}"]`) || document.querySelector('.tab-btn[data-tab="all"]')).classList.add('active');
+      activeTab = tab;
+      if (updateHash) {
+        try { history.replaceState(null, '', tab === 'all' ? location.pathname + location.search : '#' + tab); } catch (_) {}
+      }
+      closeCaseRunner();
+      renderNosologies(searchInput.value);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Search input handler
+    searchInput.addEventListener('input', (e) => {
+      renderNosologies(e.target.value);
+    });
+
+    // Dark Theme Toggle
+    const themeBtn = document.getElementById('themeBtn');
+    themeBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+
+    if (localStorage.getItem('theme') === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+
+    // Print Button
+    document.getElementById('printBtn').addEventListener('click', () => {
+      window.print();
+    });
+
+    // CALCULATOR 1: CKD-EPI 2021 GFR
+    function calculateGFR() {
+      const gender = document.getElementById('gfrGender').value;
+      const age = parseFloat(document.getElementById('gfrAge').value);
+      const scr = parseFloat(document.getElementById('gfrCreatinine').value) / 88.4; // convert umol/L to mg/dL
+
+      if (!age || !scr) return;
+
+      let kappa = gender === 'female' ? 0.7 : 0.9;
+      let alpha = gender === 'female' ? -0.241 : -0.302;
+      let genderFactor = gender === 'female' ? 1.012 : 1.0;
+
+      let minRatio = Math.min(scr / kappa, 1);
+      let maxRatio = Math.max(scr / kappa, 1);
+
+      let gfr = 142 * Math.pow(minRatio, alpha) * Math.pow(maxRatio, -1.200) * Math.pow(0.9938, age) * genderFactor;
+      gfr = Math.round(gfr);
+
+      const resultBox = document.getElementById('gfrResult');
+      const valEl = document.getElementById('gfrValue');
+      const stageEl = document.getElementById('gfrStage');
+      const advEl = document.getElementById('gfrAdvice');
+
+      resultBox.style.display = 'block';
+      valEl.textContent = gfr;
+
+      if (gfr >= 90) {
+        stageEl.textContent = 'Стадия С1: Нормальная или повышенная функция почек';
+        stageEl.style.color = 'var(--success)';
+        advEl.textContent = 'Ограничений по дозировкам большинства препаратов нет. Мониторинг по показаниям.';
+      } else if (gfr >= 60) {
+        stageEl.textContent = 'Стадия С2: Незначительное снижение функции почек';
+        stageEl.style.color = '#738000';
+        advEl.textContent = 'Дозы стандартные. Контроль калия и креатинина при назначении иАПФ/БРА.';
+      } else if (gfr >= 45) {
+        stageEl.textContent = 'Стадия С3а: Умеренное снижение СКФ';
+        stageEl.style.color = '#c47d00';
+        advEl.textContent = 'Ограничить длительный прием НПВП. Контроль дозировок препаратов, выводящихся почками.';
+      } else if (gfr >= 30) {
+        stageEl.textContent = 'Стадия С3б: Существенное снижение СКФ';
+        stageEl.style.color = '#d13438';
+        advEl.textContent = '⚠️ НПВП противопоказаны! Тиазидные диуретики теряют эффективность (переход на петлевые). Снижение доз антибиотиков.';
+      } else if (gfr >= 15) {
+        stageEl.textContent = 'Стадия С4: Резкое снижение СКФ';
+        stageEl.style.color = '#d13438';
+        advEl.textContent = '⛔ Высокий риск гиперкалиемии. Консультация нефролога. Коррекция всех почечных доз.';
+      } else {
+        stageEl.textContent = 'Стадия С5: Терминальная почечная недостаточность';
+        stageEl.style.color = '#d13438';
+        advEl.textContent = '⛔ Показана заместительная почечная терапия (диализ). Экстренная консультация нефролога.';
+      }
+    }
+
+    // CALCULATOR 2: Oral Rehydration
+    function calculateRehydration() {
+      const weight = parseFloat(document.getElementById('rehydrWeight').value);
+      const degree = document.getElementById('rehydrDegree').value;
+
+      if (!weight) return;
+
+      const factor = degree === 'mild' ? 30 : 50;
+      const vol4h = Math.round(weight * factor);
+      const rate15 = Math.round(vol4h / 16); // 4 hours = 16 15-min intervals
+
+      const resBox = document.getElementById('rehydrResult');
+      resBox.style.display = 'block';
+      document.getElementById('rehydr4h').textContent = vol4h;
+      document.getElementById('rehydrRate').textContent = rate15;
+    }
+
+    // CALCULATOR 3: Antipyretics
+    function calculateAntipyretic() {
+      const weight = parseFloat(document.getElementById('antipyreticWeight').value);
+      const drug = document.getElementById('antipyreticDrug').value;
+
+      if (!weight) return;
+
+      const resBox = document.getElementById('antipyreticResult');
+      resBox.style.display = 'block';
+
+      if (drug === 'paracetamol') {
+        const single = Math.min(Math.round(weight * 15), 1000);
+        const daily = Math.min(Math.round(weight * 60), 4000);
+        document.getElementById('antipyreticSingle').textContent = `${single} мг (1–2 табл. по 500 мг)`;
+        document.getElementById('antipyreticDaily').textContent = `${daily} мг (до 4–8 табл./сут)`;
+        document.getElementById('antipyreticNotes').textContent = 'Интервал между приемами не менее 4–6 часов. Не превышать суточный лимит!';
+      } else {
+        const single = Math.min(Math.round(weight * 10), 400);
+        const daily = Math.min(Math.round(weight * 30), 1200);
+        document.getElementById('antipyreticSingle').textContent = `${single} мг (1–2 табл. по 200 мг)`;
+        document.getElementById('antipyreticDaily').textContent = `${daily} мг (до 6 табл. по 200 мг)`;
+        document.getElementById('antipyreticNotes').textContent = 'Принимать строго после еды. Запивать полным стаканом воды.';
+      }
+    }
+
+    // ============================================================
+    //  ТРЕНАЖЕР КЛИНИЧЕСКИХ КЕЙСОВ
+    // ============================================================
+    let caseFilter = 'all';
+    let activeCase = null;
+    let activeStep = 0;
+    let stepResults = [];
+    let stepChecked = false;
+
+    function escapeHtml(str) {
+      return String(str == null ? '' : str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function getCaseScores() {
+      try { return JSON.parse(localStorage.getItem('caseScores') || '{}'); }
+      catch (_) { return {}; }
+    }
+
+    function saveCaseScore(caseId, percent) {
+      const scores = getCaseScores();
+      if (!scores[caseId] || percent > scores[caseId]) {
+        scores[caseId] = percent;
+        try { localStorage.setItem('caseScores', JSON.stringify(scores)); } catch (_) {}
+      }
+    }
+
+    function getCases() {
+      return (window.CLINICAL_CASES && Array.isArray(window.CLINICAL_CASES.cases)) ? window.CLINICAL_CASES.cases : [];
+    }
+
+    function renderCasesList() {
+      const cases = getCases();
+      if (!cases.length) {
+        casesGrid.innerHTML = '<p style="color: var(--text-muted);">Библиотека кейсов не загружена.</p>';
+        return;
+      }
+      const scores = getCaseScores();
+      const passed = Object.keys(scores).length;
+      const avg = passed ? Math.round(Object.values(scores).reduce((a, b) => a + b, 0) / passed) : 0;
+      casesStats.innerHTML = `
+        <span>📚 Кейсов: ${cases.length}</span>
+        <span>✅ Пройдено: ${passed}</span>
+        <span>⭐ Средний балл: ${avg}%</span>
+      `;
+
+      const nosologies = [];
+      cases.forEach(c => {
+        if (!nosologies.some(n => n.id === c.nosologyId)) nosologies.push({ id: c.nosologyId, title: c.nosologyTitle });
+      });
+
+      casesFilters.innerHTML = `
+        <button class="cases-filter-btn ${caseFilter === 'all' ? 'active' : ''}" data-case-filter="all">Все кейсы</button>
+        ${nosologies.map(n => `<button class="cases-filter-btn ${caseFilter === n.id ? 'active' : ''}" data-case-filter="${escapeHtml(n.id)}">${escapeHtml(n.title)}</button>`).join('')}
+      `;
+
+      const visible = cases.filter(c => caseFilter === 'all' || c.nosologyId === caseFilter);
+      casesGrid.innerHTML = visible.map(c => {
+        const best = scores[c.id];
+        const diffLabel = c.difficulty === 'advanced' ? 'Продвинутый' : 'Базовый';
+        return `
+          <article class="case-card" onclick="openCase('${escapeHtml(c.id)}')">
+            <div class="case-card-top">
+              <span class="case-chip">${escapeHtml(c.nosologyTitle)}</span>
+              <span class="case-chip ${c.difficulty === 'advanced' ? 'advanced' : 'basic'}">${diffLabel}</span>
+            </div>
+            <h3>${escapeHtml(c.title)}</h3>
+            <div class="case-meta">👤 ${escapeHtml(c.patient.sex)}, ${c.patient.age} лет · ${c.steps.length} шага разбора</div>
+            <div style="margin-top: auto; display: flex; justify-content: space-between; align-items: center;">
+              ${best ? `<span class="case-score-badge">✓ Лучший результат: ${best}%</span>` : '<span class="case-meta">Ещё не пройден</span>'}
+              <span class="case-chip">Разобрать →</span>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    casesFilters.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-case-filter]');
+      if (!btn) return;
+      caseFilter = btn.getAttribute('data-case-filter');
+      renderCasesList();
+    });
+
+    function openCase(id) {
+      const c = getCases().find(x => x.id === id);
+      if (!c) return;
+      activeCase = c;
+      activeStep = 0;
+      stepResults = [];
+      stepChecked = false;
+      casesListView.style.display = 'none';
+      caseRunner.style.display = 'block';
+      renderCaseStep();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function closeCaseRunner() {
+      if (!caseRunner) return;
+      caseRunner.style.display = 'none';
+      caseRunner.innerHTML = '';
+      casesListView.style.display = 'block';
+      activeCase = null;
+      activeStep = 0;
+      stepResults = [];
+      stepChecked = false;
+    }
+
+    function renderPatientCard() {
+      const p = activeCase.patient;
+      const vitals = (p.vitals || []).map(v => `
+        <div class="vital-pill ${v.alert ? 'alert' : ''}">
+          ${escapeHtml(v.label)}<strong>${escapeHtml(v.value)}</strong>
+        </div>
+      `).join('');
+      const labs = p.labs ? `<div class="patient-field"><h4>Лабораторно / инструментально</h4><p>${escapeHtml(p.labs)}</p></div>` : '';
+      return `
+        <div class="patient-card">
+          <h2>${escapeHtml(activeCase.title)}</h2>
+          <div class="patient-sub">${escapeHtml(p.sex)}, ${p.age} лет · ${escapeHtml(activeCase.nosologyTitle)}</div>
+          <div class="patient-grid">
+            <div class="patient-field"><h4>Жалобы</h4><p>${escapeHtml(p.complaints)}</p></div>
+            <div class="patient-field"><h4>Анамнез</h4><p>${escapeHtml(p.anamnesis)}</p></div>
+            <div class="patient-field"><h4>Объективно</h4><p>${escapeHtml(p.objective)}</p></div>
+            ${labs}
+          </div>
+          <div class="vitals-row">${vitals}</div>
+        </div>
+      `;
+    }
+
+    function renderProgress() {
+      return activeCase.steps.map((_, i) => {
+        const cls = i < activeStep ? 'done' : (i === activeStep ? 'active' : '');
+        return `<div class="step-dot ${cls}"></div>`;
+      }).join('');
+    }
+
+    function renderCaseStep() {
+      const step = activeCase.steps[activeStep];
+      stepChecked = false;
+      const isLast = activeStep === activeCase.steps.length - 1;
+      const inputType = step.type === 'multi' ? 'checkbox' : 'radio';
+
+      const optionsHtml = step.options.map((opt, i) => `
+        <label class="case-option" data-opt="${i}">
+          <input type="${inputType}" name="caseStepOption" value="${i}">
+          <span>
+            <span class="opt-text">${escapeHtml(opt.text)}</span>
+            <span class="opt-why">${escapeHtml(opt.why)}</span>
+          </span>
+        </label>
+      `).join('');
+
+      caseRunner.innerHTML = `
+        <div class="case-runner-top">
+          <button class="btn" onclick="closeCaseRunner()">← К списку кейсов</button>
+          <div class="case-progress">${renderProgress()}</div>
+          <span class="case-meta">Шаг ${activeStep + 1} из ${activeCase.steps.length}</span>
+        </div>
+        ${renderPatientCard()}
+        <div class="case-step">
+          <h3>${escapeHtml(step.prompt)}</h3>
+          <p class="step-hint">${escapeHtml(step.hint || '')}</p>
+          <div id="caseOptions">${optionsHtml}</div>
+          <div class="step-feedback" id="stepFeedback"></div>
+          <div class="case-step-actions">
+            <button class="btn btn-primary" id="caseCheckBtn" onclick="checkCaseStep()">Проверить</button>
+            <button class="btn" id="caseNextBtn" style="display: none;" onclick="nextCaseStep()">${isLast ? 'Завершить разбор' : 'Следующий шаг →'}</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function checkCaseStep() {
+      if (stepChecked) return;
+      const step = activeCase.steps[activeStep];
+      const selected = [];
+      caseRunner.querySelectorAll('input[name="caseStepOption"]:checked').forEach(inp => selected.push(Number(inp.value)));
+
+      const correctIdx = step.options.map((o, i) => o.ok ? i : -1).filter(i => i >= 0);
+      let score;
+      if (step.type === 'multi') {
+        if (correctIdx.length === 0) {
+          score = selected.length === 0 ? 1 : 0;
+        } else {
+          const selCorrect = selected.filter(i => step.options[i].ok).length;
+          const selWrong = selected.filter(i => !step.options[i].ok).length;
+          score = Math.max(0, (selCorrect - selWrong) / correctIdx.length);
+        }
+      } else {
+        score = (selected.length === 1 && step.options[selected[0]].ok) ? 1 : 0;
+      }
+
+      stepResults[activeStep] = { score: score, selected: selected };
+      stepChecked = true;
+
+      caseRunner.querySelectorAll('.case-option').forEach((el, i) => {
+        const isCorrect = step.options[i].ok;
+        const isSelected = selected.includes(i);
+        el.classList.add('revealed', 'locked');
+        const input = el.querySelector('input');
+        if (input) input.disabled = true;
+        if (isCorrect && isSelected) el.classList.add('correct');
+        else if (isCorrect && !isSelected) el.classList.add('missed');
+        else if (!isCorrect && isSelected) el.classList.add('wrong');
+      });
+
+      const fb = document.getElementById('stepFeedback');
+      const pct = Math.round(score * 100);
+      let cls = 'good', text = '';
+      if (score === 1) {
+        text = `✅ Верно! ${pct}% по шагу.`;
+      } else if (score >= 0.5) {
+        cls = 'partial';
+        text = `⚠️ Частично верно (${pct}%). Посмотрите пояснения к вариантам ниже.`;
+      } else {
+        cls = 'bad';
+        text = `❌ Есть существенные ошибки (${pct}%). Разберите пояснения к каждому варианту.`;
+      }
+      fb.className = `step-feedback show ${cls}`;
+      fb.textContent = text;
+
+      document.getElementById('caseCheckBtn').style.display = 'none';
+      document.getElementById('caseNextBtn').style.display = 'inline-flex';
+    }
+
+    function nextCaseStep() {
+      if (!stepChecked) { showToast('Сначала проверьте ответ'); return; }
+      if (activeStep < activeCase.steps.length - 1) {
+        activeStep++;
+        renderCaseStep();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        finishCase();
+      }
+    }
+
+    function finishCase() {
+      const total = stepResults.reduce((a, r) => a + (r ? r.score : 0), 0);
+      const percent = Math.round((total / activeCase.steps.length) * 100);
+      saveCaseScore(activeCase.id, percent);
+
+      let verdict, color;
+      if (percent >= 90) { verdict = 'Отлично! Тактика соответствует клиническим рекомендациям.'; color = 'var(--success)'; }
+      else if (percent >= 70) { verdict = 'Хорошо, но есть зоны для повторения.'; color = '#c47d00'; }
+      else { verdict = 'Стоит вернуться к разбору нозологии и пройти кейс заново.'; color = 'var(--danger)'; }
+
+      const breakdown = activeCase.steps.map((s, i) => {
+        const r = stepResults[i];
+        const p = r ? Math.round(r.score * 100) : 0;
+        return `<div class="bd-row"><span>Шаг ${i + 1}: ${escapeHtml(s.prompt.replace(/^Шаг \d+\.\s*/, ''))}</span><strong style="color:${p === 100 ? 'var(--success)' : (p >= 50 ? '#c47d00' : 'var(--danger)')}">${p}%</strong></div>`;
+      }).join('');
+
+      caseRunner.innerHTML = `
+        <div class="case-runner-top">
+          <button class="btn" onclick="closeCaseRunner()">← К списку кейсов</button>
+          <div class="case-progress">${activeCase.steps.map(() => '<div class="step-dot done"></div>').join('')}</div>
+        </div>
+        <div class="case-result">
+          <div class="score-ring" style="color:${color}">${percent}%</div>
+          <h3>${escapeHtml(activeCase.title)}</h3>
+          <p class="verdict">${escapeHtml(verdict)}</p>
+          <div class="case-breakdown">${breakdown}</div>
+          <div class="case-takeaway">
+            <h4>📌 Ключевой вывод</h4>
+            <p>${escapeHtml(activeCase.takeaway)}</p>
+          </div>
+          <div class="case-step-actions" style="justify-content: center;">
+            <button class="btn btn-primary" onclick="openCase('${escapeHtml(activeCase.id)}')">🔁 Пройти заново</button>
+            <button class="btn" onclick="goToNosology('${escapeHtml(activeCase.nosologyId)}')">📖 Открыть нозологию</button>
+            <button class="btn" onclick="closeCaseRunner()">← К списку кейсов</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function goToNosology(id) {
+      activateTab(id);
+    }
+
+    // ============================================================
+    //  PWA: Service Worker, установка, офлайн-статус
+    // ============================================================
+    let deferredInstallPrompt = null;
+
+    function updateOnlineStatus() {
+      if (!offlineChip) return;
+      offlineChip.hidden = navigator.onLine;
+    }
+
+    function isStandalone() {
+      return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+    }
+
+    function setupPwaInstall() {
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredInstallPrompt = e;
+        installBtn.style.display = 'inline-flex';
+      });
+
+      window.addEventListener('appinstalled', () => {
+        deferredInstallPrompt = null;
+        installBtn.style.display = 'none';
+        showToast('Приложение установлено 🎉');
+      });
+
+      const isIos = /iphone|ipad|ipod/i.test(navigator.userAgent);
+      const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+      if (isIos && isSafari && !isStandalone()) {
+        installBtn.style.display = 'inline-flex';
+      }
+
+      installBtn.addEventListener('click', async () => {
+        if (deferredInstallPrompt) {
+          deferredInstallPrompt.prompt();
+          const choice = await deferredInstallPrompt.userChoice;
+          if (choice && choice.outcome === 'accepted') showToast('Установка началась…');
+          deferredInstallPrompt = null;
+          installBtn.style.display = 'none';
+        } else if (isIos && isSafari) {
+          showToast('Safari: «Поделиться» → «На экран Домой»');
+        } else {
+          showToast('Меню браузера → «Установить приложение»');
+        }
+      });
+    }
+
+    function registerServiceWorker() {
+      if (!('serviceWorker' in navigator)) return;
+      if (location.protocol === 'file:') return; // SW недоступен при открытии файла напрямую
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').then((reg) => {
+          reg.addEventListener('updatefound', () => {
+            const sw = reg.installing;
+            if (!sw) return;
+            sw.addEventListener('statechange', () => {
+              if (sw.state === 'installed' && navigator.serviceWorker.controller) {
+                showToast('Доступно обновление. Перезапустите приложение.');
+              }
+            });
+          });
+        }).catch((err) => {
+          console.warn('Service Worker registration failed:', err);
+        });
+      });
+    }
+
+    window.addEventListener('online', updateOnlineStatus);
+    window.addEventListener('offline', updateOnlineStatus);
+    window.addEventListener('hashchange', () => {
+      const hash = location.hash.replace('#', '');
+      if (hash && hash !== activeTab) activateTab(hash, false);
+    });
+
+    // Initialize
+    loadData().then(() => {
+      const hash = location.hash.replace('#', '');
+      if (hash && document.querySelector(`.tab-btn[data-tab="${hash}"]`)) {
+        activateTab(hash, false);
+      }
+    });
+    updateOnlineStatus();
+    setupPwaInstall();
+    registerServiceWorker();
+  </script>
+</body>
+</html>
